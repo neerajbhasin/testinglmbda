@@ -9,8 +9,7 @@ on:
 defaults:
   run:
     working-directory: neeraj-testing
-  run:
-    working-directory: testing2
+    working-directory1: testing2
 jobs:
   deploy:
     runs-on: ubuntu-latest
