@@ -35,6 +35,7 @@ jobs:
       - name: deploy neeraj-testing
         run: |
           ls
+          cd neeraj-testing
           zip -r neeraj-testing.zip index.js package.json package-lock.json
           aws  lambda update-function-code --function-name=neeraj-testing --zip-file=fileb://neeraj-testing.zip
       # - name: Installing dependencies for testing2
