@@ -36,7 +36,7 @@ jobs:
         run: |
           ls
           cd neeraj-testing
-          zip -r neeraj-testing.zip index.js package.json package-lock.json
+          zip -r neeraj-testing.zip index.js package.json package-lock.json node_modules
           aws  lambda update-function-code --function-name=neeraj-testing --zip-file=fileb://neeraj-testing.zip
       # - name: Installing dependencies for testing2
       #   working-directory: testing2
