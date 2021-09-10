@@ -8,8 +8,7 @@ on:
       - "testing2/index.js"
 defaults:
   run:
-    working-directory: |
-      testing2
+    working-directory: testing2
 jobs:
   deploy:
     runs-on: ubuntu-latest
