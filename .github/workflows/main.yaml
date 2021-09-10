@@ -33,5 +33,6 @@ jobs:
           npm ci
       - name: deploy
         run: |
+          ls
           zip -r deploy.zip . -i neeraj-testing
           aws lambda update-function-code --function-name=neeraj-testing --zip-file=fileb://deploy.zip
