@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/neerajbhasin/testinglmbda/issues"
   },
-  "homepage": "https://github.com/neerajbhasin/testinglmbda#readme"
+  "homepage": "https://github.com/neerajbhasin/testinglmbda#readme",
+  "dependencies": {
+    "web3": "^1.5.2"
+  }
 }
