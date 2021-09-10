@@ -7,7 +7,7 @@ exports.handler = async (event) => {
   const response = {
     statusCode: 200,
     body: JSON.stringify(
-      `1Generating random number in lambda${num}. I am gonna make this thing work!!!!`
+      `2Generating random number in lambda${num}. I am gonna make this thing work!!!!`
     ),
   };
   return response;
