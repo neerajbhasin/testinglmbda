@@ -6,7 +6,9 @@ exports.handler = async (event) => {
   console.log("numassssssasassssaszdss7");
   const response = {
     statusCode: 200,
-    body: JSON.stringify(`Generating random number in lambda ${num}`),
+    body: JSON.stringify(
+      `Generating random number in lambda${num}. I am gonna make this thing work!!!!`
+    ),
   };
   return response;
 };

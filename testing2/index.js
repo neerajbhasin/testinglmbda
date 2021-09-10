@@ -6,7 +6,7 @@ exports.handler = async (event) => {
   const response = {
     statusCode: 200,
     body: JSON.stringify(
-      `Hello from Lambda! ${num}this is testing2 function!!abs!!!`
+      `Hello from Lambda! ${num}this is testing2 function!!abs brakes!!!`
     ),
   };
   return response;
