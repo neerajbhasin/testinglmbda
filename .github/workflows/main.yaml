@@ -4,7 +4,10 @@ on:
     branches:
       - master
     paths:
-      - "neeraj-testing/**.js"
+      - "neeraj-testing/index.js"
+defaults:
+  run:
+    working-directory: neeraj-testing
 jobs:
   deploy:
     runs-on: ubuntu-latest
