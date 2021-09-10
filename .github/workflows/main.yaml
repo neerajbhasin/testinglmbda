@@ -6,9 +6,7 @@ on:
     paths:
       - "neeraj-testing/index.js"
       - "testing2/index.js"
-defaults:
-  run:
-    working-directory: testing2, neeraj-testing
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -27,15 +25,27 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-      - name: Install Dependencies
+      - name: Install Dependencies for neeraj-testing
+        working-directory: neeraj-testing
         env:
           CI: true
         run: |
           ls
           npm ci
-      - name: deploy
+      - name: deploy neeraj-testing
         run: |
           ls
           zip -r deploy.zip .
           aws lambda update-function-code --function-name=neeraj-testing --zip-file=fileb://deploy.zip
+      - name: Installing dependencies for testing2
+        working-directory: testing2
+        env:
+          CI: true
+        run: |
+          ls
+          npm ci
+      - name: deploying testing2
+        run: |
+          ls
+          zip -r deploy.zip .
           aws lambda update-function-code --function-name=neeraj-testing2 --zip-file=fileb://deploy.zip
