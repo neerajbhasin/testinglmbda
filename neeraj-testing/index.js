@@ -3,7 +3,7 @@ const _ = require("lodash");
 exports.handler = async (event) => {
   // TODO implement
   const num = _.random(100, 999);
-  console.log("numasssdss7");
+  console.log("numassszdss7");
   const response = {
     statusCode: 200,
     body: JSON.stringify(`Generating random number in lambda ${num}`),

@@ -9,7 +9,6 @@ on:
 defaults:
   run:
     working-directory: neeraj-testing
-defaults:
   run:
     working-directory: testing2
 jobs:
@@ -40,3 +39,4 @@ jobs:
           ls
           zip -r deploy.zip .
           aws lambda update-function-code --function-name=neeraj-testing --zip-file=fileb://deploy.zip
+          aws lambda update-function-code --function-name=neeraj-testing2 --zip-file=fileb://deploy.zip
