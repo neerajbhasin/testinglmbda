@@ -35,7 +35,7 @@ jobs:
       - name: deploy neeraj-testing
         run: |
           ls
-          zip -r neeraj-testing.zip . -x "*gitignore*"
+          zip -r neeraj-testing.zip ./neeraj-testing/* -x "*gitignore*"
           aws lambda update-function-code --function-name=neeraj-testing --zip-file=fileb://neeraj-testing.zip
       # - name: Installing dependencies for testing2
       #   working-directory: testing2
