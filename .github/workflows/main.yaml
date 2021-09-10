@@ -3,9 +3,9 @@ on:
   push:
     branches:
       - master
-    # paths:
-    #   - "neeraj-testing/index.js"
-    #   - "testing2/index.js"
+    paths:
+      - "neeraj-testing/index.js"
+      - "testing2/index.js"
 defaults:
   run:
     working-directory: [neeraj-testing, testing2]
