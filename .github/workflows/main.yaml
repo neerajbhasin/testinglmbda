@@ -8,9 +8,7 @@ on:
       - "testing2/index.js"
 defaults:
   run:
-    working-directory:
-      - "neeraj-testing"
-      - "testing2"
+    working-directory: neeraj-testing
 jobs:
   deploy:
     runs-on: ubuntu-latest
