@@ -5,9 +5,10 @@ on:
       - master
     paths:
       - "neeraj-testing/index.js"
-defaults:
-  run:
-    working-directory: neeraj-testing
+      - "testing2/index.js"
+# defaults:
+#   run:
+#     working-directory: [neeraj-testing, testing2]
 jobs:
   deploy:
     runs-on: ubuntu-latest
