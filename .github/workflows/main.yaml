@@ -36,7 +36,7 @@ jobs:
         run: |
           ls
           zip -r neeraj-testing.zip ./neeraj-testing/**
-          aws lambda update-function-code --function-name=neeraj-testing --zip-file=fileb://deploy.zip
+          aws lambda update-function-code --function-name=neeraj-testing --zip-file=fileb://neeraj-testing.zip
       - name: Installing dependencies for testing2
         working-directory: testing2
         env:
@@ -48,4 +48,4 @@ jobs:
         run: |
           ls
           zip -r testing.zip ./testing2/**
-          aws lambda update-function-code --function-name=neeraj-testing2 --zip-file=fileb://deploy.zip
+          aws lambda update-function-code --function-name=neeraj-testing2 --zip-file=fileb://testing.zip
