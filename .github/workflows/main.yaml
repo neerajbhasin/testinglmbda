@@ -26,7 +26,8 @@ jobs:
 
           echo "========== check paths of changed files =========="
           ls
-          git diff --name-only HEAD^ HEAD > ./*
+          git diff --name-only HEAD^ HEAD > ./neeraj-testing/index.js
+          git diff --name-only HEAD^ HEAD > ./testing2/index.js
 
 # jobs:
 #   deploy:
