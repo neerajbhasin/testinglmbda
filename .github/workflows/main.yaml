@@ -43,46 +43,46 @@ jobs:
             fi
           done true
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14.x]
-    steps:
-      - uses: actions/checkout@v1
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-      - name: Install Dependencies for neeraj-testing
-        working-directory: neeraj-testing
-        env:
-          CI: true
-        run: |
-          ls
-          npm ci
-      - name: deploy neeraj-testing
-        run: |
-          ls
-          cd neeraj-testing
-          zip -r neeraj-testing.zip index.js package.json package-lock.json node_modules
-          aws  lambda update-function-code --function-name=neeraj-testing --zip-file=fileb://neeraj-testing.zip
-      - name: Installing dependencies for testing2
-        working-directory: testing2
-        env:
-          CI: true
-        run: |
-          ls
-          npm ci
-      - name: deploying testing2
-        run: |
-          ls
-          zip -r testing.zip index.js package.json package-lock.json node_modules
-          aws lambda update-function-code --function-name=neeraj-testing2 --zip-file=fileb://testing.zip
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     strategy:
+#       matrix:
+#         node-version: [14.x]
+#     steps:
+#       - uses: actions/checkout@v1
+#       - name: Use Node.js ${{ matrix.node-version }}
+#         uses: actions/setup-node@v1
+#         with:
+#           node-version: ${{ matrix.node-version }}
+#       - name: Configure AWS Credentials
+#         uses: aws-actions/configure-aws-credentials@v1
+#         with:
+#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           aws-region: us-east-1
+#       - name: Install Dependencies for neeraj-testing
+#         working-directory: neeraj-testing
+#         env:
+#           CI: true
+#         run: |
+#           ls
+#           npm ci
+#       - name: deploy neeraj-testing
+#         run: |
+#           ls
+#           cd neeraj-testing
+#           zip -r neeraj-testing.zip index.js package.json package-lock.json node_modules
+#           aws  lambda update-function-code --function-name=neeraj-testing --zip-file=fileb://neeraj-testing.zip
+#       - name: Installing dependencies for testing2
+#         working-directory: testing2
+#         env:
+#           CI: true
+#         run: |
+#           ls
+#           npm ci
+#       - name: deploying testing2
+#         run: |
+#           ls
+#           zip -r testing.zip index.js package.json package-lock.json node_modules
+#           aws lambda update-function-code --function-name=neeraj-testing2 --zip-file=fileb://testing.zip
