@@ -26,7 +26,7 @@ jobs:
 
           echo "========== check paths of changed files =========="
 
-          git diff --name-only HEAD^ HEAD > /neeraj-testing/index.js
+          git diff --name-only HEAD^ HEAD
           # git diff --name-only HEAD^ HEAD > /testing2/index.js
           while IFS= read -r file
           do
