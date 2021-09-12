@@ -31,7 +31,7 @@ jobs:
       - name: Run step only when files change.
         if: contains(steps.changed-files.outputs.modified_files, 'neeraj-testing/index.js')
         run: |
-          echo "Changed directory: ${{ steps.verify_changed_files.outputs.changed_files }}"
+          echo "Changed directory: ${{ steps.changed-files.outputs.modified_files }}"
 
     # steps:
     #   - name: Checkout code
