@@ -63,7 +63,7 @@ jobs:
           aws-region: us-east-1
       - name: Install Dependencies for neeraj-testing
         working-directory: neeraj-testing
-        if: git diff --name-only HEAD^ HEAD > /neeraj-testing/index.js === /neeraj-testing/index.js
+        if: git diff --name-only HEAD^ HEAD > neeraj-testing/index.js
         env:
           CI: true
         run: |
