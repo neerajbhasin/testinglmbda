@@ -38,7 +38,7 @@ jobs:
             else
               echo "::set-output name=run_job::true"
             fi
-          done < files.txt
+          done < index.js
 
 # jobs:
 #   deploy:
