@@ -7,41 +7,41 @@ on:
       - "neeraj-testing/**"
       - "testing2/**"
 
-# jobs:
-#   check:
-#     name: Check changes files
-#     outputs:
-#       run_jobs: ${{ steps.check_files.outputs.run_job}}
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v1
-#         with:
-#           fetch-depth: 2
-#       - name: check files
-#         id: check_files
-#         run: |
-#           echo "--------- list changed files ---------"
-#           git diff --name-only HEAD^ HEAD
+jobs:
+  check:
+    name: Check changes files
+    outputs:
+      run_jobs: ${{ steps.check_files.outputs.run_job}}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 2
+      - name: check files
+        id: check_files
+        run: |
+          echo "--------- list changed files ---------"
+          git diff --name-only HEAD^ HEAD
 
-#           echo "========== check paths of changed files =========="
+          echo "========== check paths of changed files =========="
 
-#           git diff --name-only HEAD^ HEAD
-#           while IFS= read -r file
-#           do
-#             echo $file
-#             if [[ $file != neeraj-testing/* ]]; then
-#               echo "This file is not under the directory 'neeraj-testing'."
-#               echo "::set-output name=run_job::false"
-#               break
-#             if [[ $file != testing2/* ]]; then
-#               echo "This file is not under the directory 'testing2'."
-#               echo "::set-output name=run_job::false"
-#               break
-#             else
-#               echo "::set-output name=run_job::true"
-#             fi
-#           done < index.js
+          git diff --name-only HEAD^ HEAD
+          while IFS= read -r file
+          do
+            echo $file
+            if [[ $file != neeraj-testing/* ]]; then
+              echo "This file is not under the directory 'neeraj-testing'."
+              echo "::set-output name=run_job::false"
+              break
+            if [[ $file != testing2/* ]]; then
+              echo "This file is not under the directory 'testing2'."
+              echo "::set-output name=run_job::false"
+              break
+            else
+              echo "::set-output name=run_job::true"
+            fi
+          done true
 
 jobs:
   deploy:
@@ -63,7 +63,6 @@ jobs:
           aws-region: us-east-1
       - name: Install Dependencies for neeraj-testing
         working-directory: neeraj-testing
-        if: git diff --name-only HEAD^ HEAD > index.js
         env:
           CI: true
         run: |
