@@ -39,8 +39,8 @@ jobs:
             fi
           done
 
-jobs_for_neeraj_testing:
-  name: deploy neeraj-testing function
+job neeraj-testing function:
+  name: job neeraj-testing function
   needs: check
   if: needs.check.outputs.run_job == 'true'
   runs-on: ubuntu-latest
