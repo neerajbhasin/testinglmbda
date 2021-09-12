@@ -35,12 +35,13 @@ jobs:
               echo "::set-output name=run_job::false"
               break
             else
+            echo "true"
               echo "::set-output name=run_job::true"
             fi
-          done
+          done < index.js
 
-  job_for_env1:
-    name: Job for env1
+  job_for_neeraj-testing:
+    name: Job for neeraj-testing
     needs: check
     if: needs.check.outputs.run_job == 'true'
     runs-on: ubuntu-latest
