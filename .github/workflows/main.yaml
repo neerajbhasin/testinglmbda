@@ -14,74 +14,87 @@ jobs:
       run_jobs: ${{ steps.check_files.outputs.run_job}}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v1
+      - name: Verify Changed files
+        uses: tj-actions/verify-changed-files@v7.2
+        id: verify-changed-files
         with:
-          fetch-depth: 2
-      - name: check files
-        id: check_files
+          files: |
+            index.js
+            neeraj-testing
+      - name: Run step only when files change.
+        if: steps.verify-changed-files.outputs.files_changed == 'true'
         run: |
-          echo "--------- list changed files ---------"
-          git diff --name-only HEAD^ HEAD
+          echo "Changed files: ${{ steps.verify_changed_files.outputs.changed_files }}"
 
-          echo "========== check paths of changed files =========="
+    # steps:
+    #   - name: Checkout code
+    #     uses: actions/checkout@v2
+    #     with:
+    #       fetch-depth: 2
+    #   - name: check files
+    #     id: check_files
+    #     run: |
+    #       echo "--------- list changed files ---------"
+    #       git diff --name-only HEAD^ HEAD
 
-          git diff --name-only HEAD^ HEAD
-          while IFS= read -r file
-          do
-            echo $file
-            if [[ $file != neeraj-testing/* ]]; then
-              echo "This file is not under the directory 'neeraj-testing'."
-              echo "::set-output name=run_job::false"
-              break
-            else
-            echo "true"
-              echo "::set-output name=run_job::true"
-            fi
-          done
+    #       echo "========== check paths of changed files =========="
 
-  job_for_neeraj-testing:
-    name: Job for neeraj-testing
-    needs: check
-    if: needs.check.outputs.run_job == 'false'
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14.x]
-    steps:
-      - uses: actions/checkout@v1
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-      - name: Install Dependencies for neeraj-testing
-        working-directory: neeraj-testing
-        env:
-          CI: true
-        run: |
-          ls
-          npm ci
-      - name: deploy neeraj-testing
-        run: |
-          ls
-          cd neeraj-testing
-          zip -r neeraj-testing.zip index.js package.json package-lock.json node_modules
-          aws  lambda update-function-code --function-name=neeraj-testing --zip-file=fileb://neeraj-testing.zip
-      # - name: Installing dependencies for testing2
-      #   working-directory: testing2
-      #   env:
-      #     CI: true
-      #   run: |
-      #     ls
-      #     npm ci
-      # - name: deploying testing2
-      #   run: |
-      #     ls
-      #     zip -r testing.zip index.js package.json package-lock.json node_modules
-      #     aws lambda update-function-code --function-name=neeraj-testing2 --zip-file=fileb://testing.zip
+    #       git diff --name-only HEAD^ HEAD
+    #       while IFS= read -r file
+    #       do
+    #         echo $file
+    #         if [[ $file != neeraj-testing/* ]]; then
+    #           echo "This file is not under the directory 'neeraj-testing'."
+    #           echo "::set-output name=run_job::false"
+    #           break
+    #         else
+    #         echo "true"
+    #           echo "::set-output name=run_job::true"
+    #         fi
+    #       done
+
+  # job_for_neeraj-testing:
+  #   name: Job for neeraj-testing
+  #   needs: check
+  #   if: needs.check.outputs.run_job == 'false'
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       node-version: [14.x]
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #     - name: Use Node.js ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+  #     - name: Configure AWS Credentials
+  #       uses: aws-actions/configure-aws-credentials@v1
+  #       with:
+  #         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #         aws-region: us-east-1
+  #     - name: Install Dependencies for neeraj-testing
+  #       working-directory: neeraj-testing
+  #       env:
+  #         CI: true
+  #       run: |
+  #         ls
+  #         npm ci
+  #     - name: deploy neeraj-testing
+  #       run: |
+  #         ls
+  #         cd neeraj-testing
+  #         zip -r neeraj-testing.zip index.js package.json package-lock.json node_modules
+  #         aws  lambda update-function-code --function-name=neeraj-testing --zip-file=fileb://neeraj-testing.zip
+  # - name: Installing dependencies for testing2
+  #   working-directory: testing2
+  #   env:
+  #     CI: true
+  #   run: |
+  #     ls
+  #     npm ci
+  # - name: deploying testing2
+  #   run: |
+  #     ls
+  #     zip -r testing.zip index.js package.json package-lock.json node_modules
+  #     aws lambda update-function-code --function-name=neeraj-testing2 --zip-file=fileb://testing.zip
