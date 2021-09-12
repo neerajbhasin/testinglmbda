@@ -8,28 +8,27 @@ on:
       - "testing2/**"
 
 jobs:
-  check:
-    name: Check changes files
-    outputs:
-      run_jobs: ${{ steps.check_files.outputs.run_job}}
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Change text file
-        run: |
-          ls
-          cd neeraj-testing
-          echo "Modified" > index.js
+        with: fetch-depth:2
 
-      - name: Verify Changed files
-        uses: tj-actions/verify-changed-files@v7.2
-        id: verify-changed-files
-        with:
-          files: |
-            index.js
-            neeraj-testing
+      - name: Get Changed files
+        id: changed-files
+        uses: tj-actions/verify-changed-files@v1.1.2
+        # with:
+        #   files: |
+        #     index.js
+        #     neeraj-testing
+      - name: List all modified files
+        run: |
+          for file in "${{ steps.changed-files.outputs.all_modified_files }}"; do
+            echo "$file was modified"
+          done
+
       - name: Run step only when files change.
-        if: contains(steps.verify-changed-files.outputs.changed_files, 'neeraj-testing')
+        if: contains(steps.verify-changed-files.outputs.changed_files, 'index.js')
         run: |
           echo "Changed directory: ${{ steps.verify_changed_files.outputs.changed_files }}"
 
