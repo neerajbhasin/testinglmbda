@@ -3,7 +3,7 @@ const _ = require("lodash");
 exports.handler = async (event) => {
   // TODO implement
   const num = _.random(100, 999);
-  console.log("12abcsdsSsdadsfaazsad");
+  console.log("12abcsdsSsdasdsfaazsad");
   const response = {
     statusCode: 200,
     body: JSON.stringify(
