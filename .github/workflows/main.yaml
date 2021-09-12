@@ -38,12 +38,12 @@ jobs:
             echo "true"
               echo "::set-output name=run_job::true"
             fi
-          done < neeraj-testing/index.js
+          done
 
   job_for_neeraj-testing:
     name: Job for neeraj-testing
     needs: check
-    if: needs.check.outputs.run_job == 'true'
+    if: needs.check.outputs.run_job == 'false'
     runs-on: ubuntu-latest
     strategy:
       matrix:
