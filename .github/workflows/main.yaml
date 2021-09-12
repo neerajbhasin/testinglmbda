@@ -45,6 +45,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
       - name: Install Dependencies for neeraj-testing
+        if: contains(steps.changed-files.outputs.modified_files, 'neeraj-testing/index.js')
         working-directory: neeraj-testing
         env:
           CI: true
@@ -59,6 +60,7 @@ jobs:
           zip -r neeraj-testing.zip index.js package.json package-lock.json node_modules
           aws  lambda update-function-code --function-name=neeraj-testing --zip-file=fileb://neeraj-testing.zip
 
+        ##checking for function2
       - name: Installing dependencies for testing2
         if: contains(steps.changed-files.outputs.modified_files, 'testing2/index.js')
         working-directory: testing2
@@ -68,8 +70,10 @@ jobs:
           ls
           npm ci
       - name: deploying testing2
+        if: contains(steps.changed-files.outputs.modified_files, 'testing2/index.js')
         run: |
           ls
+          cd testing2
           zip -r testing.zip index.js package.json package-lock.json node_modules
           aws lambda update-function-code --function-name=neeraj-testing2 --zip-file=fileb://testing.zip
 
