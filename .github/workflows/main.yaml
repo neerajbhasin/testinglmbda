@@ -30,7 +30,7 @@ jobs:
           while IFS= read -r file
           do
             echo $file
-            if [[ $file != ./ ]]; then
+            if [[ $file != * ]]; then
               echo "This file is not under the directory 'in root'."
               echo "::set-output name=run_job::false"
               break
