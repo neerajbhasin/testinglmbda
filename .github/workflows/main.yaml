@@ -41,7 +41,7 @@ jobs:
             else
               echo "::set-output name=run_job::true"
             fi
-          done < neeraj-testing/index.js
+          done
 
 # jobs:
 #   deploy:
