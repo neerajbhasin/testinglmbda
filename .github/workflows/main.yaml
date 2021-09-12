@@ -31,7 +31,7 @@ jobs:
           while IFS= read -r file
           do
             echo $file
-            if [[ $file != "neeraj-testing"* ]]; then
+            if [[ $file != "./neeraj-testing/index.js"* ]]; then
               echo "This file is not under the directory 'neeraj-testing'."
               echo "::set-output name=run_job::false"
               break
