@@ -39,8 +39,8 @@ jobs:
             fi
           done
 
-job neeraj-testing function:
-  name: job neeraj-testing function
+job_for_env1:
+  name: Job for env1
   needs: check
   if: needs.check.outputs.run_job == 'true'
   runs-on: ubuntu-latest
