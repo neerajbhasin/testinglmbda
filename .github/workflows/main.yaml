@@ -12,7 +12,7 @@ jobs:
     name: Check changes files
     outputs:
       run_jobs: ${{ steps.check_files.outputs.run_job}}
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
