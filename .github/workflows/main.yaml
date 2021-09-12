@@ -34,8 +34,6 @@ jobs:
         # - name: Run step only when files change.
         #   if: contains(steps.changed-files.outputs.modified_files, 'neeraj-testing/index.js')
 
-    steps:
-      - uses: actions/checkout@v1
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
