@@ -24,6 +24,9 @@ jobs:
           echo "--------- list changed files ---------"
           git diff --name-only HEAD^ HEAD
 
+          echo "========== check paths of changed files =========="
+          git diff --name-only HEAD^ HEAD > files.txt
+
 # jobs:
 #   deploy:
 #     runs-on: ubuntu-latest
