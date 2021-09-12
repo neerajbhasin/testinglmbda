@@ -27,19 +27,18 @@ jobs:
           echo "========== check paths of changed files =========="
 
           git diff --name-only HEAD^ HEAD > neeraj-testing/index.js
-          git diff --name-only HEAD^ HEAD > testing2/index.js
-          echo "changed files"+$file
+          # git diff --name-only HEAD^ HEAD > testing2/index.js
           while IFS= read -r file
           do
             echo $file
-            if [[ $file != "neeraj-testing/index.js"* ]]; then
+            if [[ $file != "neeraj-testing/"* ]]; then
               echo "This file is not under the directory 'neeraj-testing'."
               echo "::set-output name=run_job::false"
               break
             else
               echo "::set-output name=run_job::true"
             fi
-          done < ./neeraj-testing/index.js
+          done < neeraj-testing/index.js
 
 # jobs:
 #   deploy:
