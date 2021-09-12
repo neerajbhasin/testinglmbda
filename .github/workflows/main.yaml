@@ -38,7 +38,7 @@ jobs:
             echo "true"
               echo "::set-output name=run_job::true"
             fi
-          done < index.js
+          done < neeraj-testing/index.js
 
   job_for_neeraj-testing:
     name: Job for neeraj-testing
